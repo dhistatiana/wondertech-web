@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dewi Lutfiana Sari · Independent Technology Consultant</title>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,400;0,9..144,700;1,9..144,300;1,9..144,400;1,9..144,700&family=Outfit:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+:root {
+  --white: #ffffff;
+  --off: #f9f7f4;
+  --off2: #f2ede6;
+  --ink: #1c1814;
+  --ink2: #4d4540;
+  --ink3: #9c9490;
+  --red: #8c1c0e;
+  --red2: #b02010;
+  --red-bg: #fcf0ee;
+  --red-border: #edc4bb;
+  --line: rgba(28,24,20,0.08);
+  --line2: rgba(28,24,20,0.05);
+  --display: 'Fraunces', Georgia, serif;
+  --body: 'Outfit', sans-serif;
+  --r: 6px;
+}
+
+html { scroll-behavior: smooth; }
+body { background: var(--white); color: var(--ink); font-family: var(--body); font-size: 15px; line-height: 1.6; overflow-x: hidden; cursor: none; }
+
+/* CURSOR */
+.c-dot { position: fixed; width: 7px; height: 7px; background: var(--red); border-radius: 50%; pointer-events: none; z-index: 9999; transform: translate(-50%,-50%); transition: transform 0.15s, width 0.2s, height 0.2s; }
+.c-ring { position: fixed; width: 28px; height: 28px; border: 1.5px solid rgba(140,28,14,0.3); border-radius: 50%; pointer-events: none; z-index: 9998; transform: translate(-50%,-50%); transition: transform 0.4s cubic-bezier(.25,.8,.25,1), width 0.3s, height 0.3s; }
+body:has(a:hover) .c-dot, body:has(button:hover) .c-dot, body:has(.hov:hover) .c-dot { width: 14px; height: 14px; }
+
+/* NOISE */
+body::after-bg { display:none; }
+body::before { content: ''; position: fixed; inset: 0; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 512 512' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E"); opacity: 0.022; pointer-events: none; z-index: 0; }
+
+.wrap { max-width: 1080px; margin: 0 auto; position: relative; z-index: 1; overflow: hidden; }
+
+/* ── NAV ── */
+.nav { display: flex; align-items: center; justify-content: space-between; padding: 28px 52px; border-bottom: 1px solid var(--line); position: sticky; top: 0; background: rgba(255,255,255,0.92); backdrop-filter: blur(20px); z-index: 100; }
+.nav-logo-wrap { display: flex; flex-direction: column; gap: 2px; }
+.nav-logo { font-family: var(--body); font-size: 13px; font-weight: 600; font-style: normal; color: var(--ink); letter-spacing: 0.14em; text-transform: uppercase; line-height: 1; }
+.nav-logo span { color: var(--ink); }
+.hero-fullname { font-family: var(--body); font-size: 13px; letter-spacing: 0.08em; color: var(--ink3); margin-bottom: 16px; font-weight: 400; }
+.nav-menu { display: flex; gap: 32px; list-style: none; }
+.nav-menu a { font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--ink3); text-decoration: none; transition: color 0.2s; font-weight: 400; }
+.nav-menu a:hover { color: var(--red); }
+.nav-btn { padding: 9px 24px; background: transparent; border: 1.5px solid var(--ink); color: var(--ink); font-family: var(--body); font-size: 11px; letter-spacing: 0.12em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, color 0.2s; border-radius: 2px; }
+.nav-btn:hover { background: var(--red); border-color: var(--red); color: #fff; }
+
+/* ── HERO ── */
+.hero { padding: 96px 52px 80px; display: grid; grid-template-columns: 1fr 380px; gap: 80px; align-items: center; border-bottom: 1px solid var(--line); position: relative; overflow: hidden; }
+.hero::after { content: ''; position: absolute; right: -60px; top: -60px; width: 360px; height: 360px; border-radius: 50%; background: radial-gradient(circle, rgba(140,28,14,0.04) 0%, transparent 70%); pointer-events: none; }
+.hero-kicker { display: flex; align-items: center; gap: 12px; font-size: 11px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 28px; font-weight: 500; }
+.hero-kicker::before { content: ''; width: 32px; height: 1px; background: var(--red); }
+.hero-h { font-family: var(--display); font-size: clamp(52px, 6.5vw, 84px); font-weight: 300; line-height: 1.0; letter-spacing: -0.02em; margin-bottom: 10px; color: var(--ink); }
+.hero-h em { display: block; font-style: italic; color: var(--red); }
+.hero-tagline { font-family: var(--display); font-size: 18px; font-style: italic; font-weight: 300; color: var(--ink3); margin-bottom: 36px; line-height: 1.5; max-width: 420px; }
+.hero-desc { font-size: 15px; line-height: 1.85; color: var(--ink2); max-width: 400px; margin-bottom: 44px; }
+.hero-actions { display: flex; align-items: center; gap: 24px; }
+.btn-fill { padding: 13px 36px; background: var(--red); color: #fff; border: none; font-family: var(--body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; transition: background 0.2s, transform 0.15s; border-radius: 2px; }
+.btn-fill:hover { background: var(--red2); transform: translateY(-1px); }
+.btn-text { font-size: 13px; color: var(--ink3); letter-spacing: 0.06em; cursor: pointer; transition: color 0.2s; display: flex; align-items: center; gap: 6px; }
+.btn-text:hover { color: var(--red); }
+.btn-text .arr { display: inline-block; transition: transform 0.2s; }
+.btn-text:hover .arr { transform: translateX(4px); }
+
+/* Hero mosaic */
+.hero-mosaic { display: grid; grid-template-columns: 1fr 1fr; grid-template-rows: 200px 110px 150px; gap: 8px; }
+.m { border-radius: var(--r); overflow: hidden; position: relative; transition: transform 0.4s cubic-bezier(.25,.8,.25,1); }
+.m:hover { transform: scale(1.02); }
+.m-a { background: var(--red); grid-column: 1; grid-row: 1; }
+.m-b { background: var(--ink); grid-column: 2; grid-row: 1/3; }
+.m-c { background: var(--off2); border: 1px solid var(--line); grid-column: 1; grid-row: 2; }
+.m-d { background: var(--red-bg); border: 1px solid var(--red-border); grid-column: 1/3; grid-row: 3; }
+.m-inner { height: 100%; padding: 22px; display: flex; flex-direction: column; justify-content: space-between; }
+.m-label { font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.5; margin-bottom: 4px; }
+.m-a .m-label, .m-b .m-label { color: #fff; }
+.m-c .m-label, .m-d .m-label { color: var(--ink3); }
+.m-a .m-val { font-family: var(--display); font-size: 22px; font-weight: 300; font-style: italic; color: #fff; line-height: 1.25; }
+.m-b .m-big { font-family: var(--display); font-size: 64px; font-weight: 300; color: rgba(255,255,255,0.08); line-height: 1; }
+.m-b .m-val { font-family: var(--display); font-size: 20px; font-weight: 300; font-style: italic; color: rgba(255,255,255,0.85); line-height: 1.3; }
+.m-b .m-sub { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: rgba(255,255,255,0.35); }
+.m-c-inner { height: 100%; display: flex; align-items: center; justify-content: center; flex-direction: column; gap: 4px; padding: 16px; }
+.m-c .m-big-n { font-family: var(--display); font-size: 44px; font-weight: 300; color: var(--red); line-height: 1; }
+.m-c .m-sub { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink3); }
+.m-d .m-quote { font-family: var(--display); font-style: italic; font-size: 17px; font-weight: 300; color: var(--red); line-height: 1.5; max-width: 260px; }
+.m-d .m-attr { font-size: 10px; letter-spacing: 0.15em; text-transform: uppercase; color: var(--ink3); }
+
+/* ── MARQUEE ── */
+.marquee { overflow: hidden; border-bottom: 1px solid var(--line); background: var(--off); padding: 14px 0; }
+.marquee-inner { display: flex; white-space: nowrap; animation: mq 26s linear infinite; }
+.mq-item { display: inline-flex; align-items: center; gap: 14px; padding: 0 32px; font-size: 11px; letter-spacing: 0.16em; text-transform: uppercase; color: var(--ink3); }
+.mq-sep { color: var(--red); font-size: 14px; }
+
+/* ── INTRO ── */
+.intro { display: grid; grid-template-columns: 340px 1fr; border-bottom: 1px solid var(--line); }
+.intro-left { padding: 72px 52px; border-right: 1px solid var(--line); display: flex; flex-direction: column; justify-content: space-between; }
+.intro-right { padding: 72px 64px; }
+.sec-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--red); margin-bottom: 20px; font-weight: 500; display: flex; align-items: center; gap: 10px; }
+.sec-label::before { content: ''; width: 20px; height: 1px; background: var(--red); }
+.sec-h { font-family: var(--display); font-size: 38px; font-weight: 300; line-height: 1.1; color: var(--ink); }
+.sec-h em { font-style: italic; color: var(--red); }
+.intro-pills { margin-top: 40px; display: flex; flex-direction: column; gap: 8px; }
+.pill { display: flex; justify-content: space-between; align-items: center; padding: 13px 18px; background: var(--off); border: 1px solid var(--line); border-radius: 3px; font-size: 13px; color: var(--ink2); transition: background 0.2s, border-color 0.2s; cursor: default; }
+.pill:hover { background: var(--red-bg); border-color: var(--red-border); }
+.pill-arr { font-size: 12px; color: var(--red); }
+.intro-body p { font-family: var(--display); font-size: 19px; font-weight: 300; line-height: 1.8; color: var(--ink2); margin-bottom: 24px; }
+.intro-body p:last-child { margin-bottom: 0; }
+.intro-body strong { font-weight: 700; color: var(--ink); font-family: var(--body); font-style: normal; }
+.intro-body em { font-style: italic; color: var(--red); }
+
+/* ── PILLARS ── */
+.pillars { border-bottom: 1px solid var(--line); }
+.pillars-head { padding: 56px 52px 0; display: flex; justify-content: space-between; align-items: baseline; border-top: 1px solid var(--line); }
+.pillars-head .sec-label { font-size: 13px; letter-spacing: 0.18em; }
+.pillars-sub { font-family: var(--display); font-style: italic; font-size: 15px; color: var(--ink3); }
+.pillars-grid { display: grid; grid-template-columns: 1fr 1fr 1fr; margin-top: 40px; }
+.pillar { padding: 52px 44px 56px; border-right: 1px solid var(--line); position: relative; overflow: hidden; transition: background 0.35s; cursor: default; }
+.pillar:last-child { border-right: none; }
+.pillar:hover { background: var(--off); }
+.pillar-bar { position: absolute; bottom: 0; left: 0; height: 2px; width: 0; background: var(--red); transition: width 0.5s cubic-bezier(.4,0,.2,1); }
+.pillar:hover .pillar-bar { width: 100%; }
+.pillar-ghost { font-family: var(--display); font-size: 80px; font-weight: 300; color: var(--line2); line-height: 1; margin-bottom: 28px; letter-spacing: -0.03em; }
+.pillar-kicker { font-size: 10px; letter-spacing: 0.2em; text-transform: uppercase; color: var(--red); margin-bottom: 10px; font-weight: 500; }
+.pillar-name { font-family: var(--display); font-size: 28px; font-weight: 400; color: var(--ink); margin-bottom: 16px; line-height: 1.1; }
+.pillar-desc { font-size: 13.5px; line-height: 1.8; color: var(--ink2); margin-bottom: 24px; }
+.pillar-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.ptag { font-size: 10px; letter-spacing: 0.1em; padding: 4px 10px; border: 1px solid var(--line); color: var(--ink3); border-radius: 2px; background: var(--white); }
+
+/* ── JOURNEY ── */
+.journey { padding: 80px 52px; border-bottom: 1px solid var(--line); }
+.journey-head { margin-bottom: 56px; }
+.journey-intro { font-family: var(--display); font-style: italic; font-size: 16px; color: var(--ink3); margin-top: 10px; max-width: 480px; }
+.jitem { display: grid; grid-template-columns: 200px 1fr; gap: 0; border-top: 1px solid var(--line2); transition: background 0.2s; }
+.jitem:last-child { border-bottom: 1px solid var(--line2); }
+.jitem:hover { background: var(--off); }
+.jitem-left { padding: 36px 32px 36px 0; border-right: 1px solid var(--line2); }
+.jitem-right { padding: 36px 0 36px 40px; }
+.j-period { font-size: 11px; letter-spacing: 0.1em; color: var(--ink3); text-transform: uppercase; margin-bottom: 10px; }
+.j-org { font-size: 13px; font-weight: 500; color: var(--ink); margin-bottom: 4px; }
+.j-org-sub { font-size: 12px; color: var(--ink3); margin-bottom: 12px; }
+.j-badge { display: inline-block; padding: 3px 10px; background: var(--red-bg); border: 1px solid var(--red-border); border-radius: 2px; font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); }
+.j-role { font-family: var(--display); font-size: 22px; font-weight: 400; color: var(--ink); margin-bottom: 12px; line-height: 1.2; }
+.j-desc { font-size: 14px; line-height: 1.85; color: var(--ink2); }
+
+/* ── CLIENTS ── */
+.clients { padding: 80px 52px; border-bottom: 1px solid var(--line); display: grid; grid-template-columns: 280px 1fr; gap: 80px; align-items: start; }
+.clients-left {}
+.clients-right {}
+.client-list { display: flex; flex-direction: column; }
+.citem { display: flex; justify-content: space-between; align-items: center; padding: 20px 0; border-bottom: 1px solid var(--line2); transition: padding-left 0.25s; cursor: default; position: relative; }
+.citem::before { content: ''; position: absolute; left: 0; top: 0; bottom: 0; width: 0; background: var(--red); transition: width 0.3s; }
+.citem:hover::before { width: 2px; }
+.citem:hover { padding-left: 14px; }
+.citem:first-child { border-top: 1px solid var(--line2); }
+.c-name { font-size: 15px; font-weight: 500; color: var(--ink); }
+.c-cat { font-size: 12px; color: var(--ink3); margin-top: 3px; }
+.c-status { font-size: 10px; letter-spacing: 0.1em; text-transform: uppercase; color: var(--red); padding: 4px 10px; border: 1px solid var(--red-border); background: var(--red-bg); border-radius: 2px; transition: background 0.2s; white-space: nowrap; }
+.citem:hover .c-status { background: var(--red); color: #fff; border-color: var(--red); }
+
+/* ── CONTACT ── */
+.contact { background: var(--ink); }
+.contact-inner { padding: 96px 52px; display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; }
+.ct-label { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 20px; display: flex; align-items: center; gap: 10px; }
+.ct-label::before { content: ''; width: 20px; height: 1px; background: rgba(255,255,255,0.2); }
+.ct-h { font-family: var(--display); font-size: 52px; font-weight: 300; color: #fff; line-height: 1.05; margin-bottom: 20px; }
+.ct-h em { font-style: italic; color: rgba(255,255,255,0.35); }
+.ct-p { font-size: 14px; line-height: 1.8; color: rgba(255,255,255,0.45); margin-bottom: 44px; }
+.ct-btn { padding: 14px 40px; background: var(--red); color: #fff; border: none; font-family: var(--body); font-size: 12px; letter-spacing: 0.1em; text-transform: uppercase; cursor: pointer; border-radius: 2px; transition: background 0.2s, transform 0.15s; }
+.ct-btn:hover { background: var(--red2); transform: translateY(-1px); }
+.ct-info { display: flex; flex-direction: column; gap: 28px; }
+.ci { border-left: 2px solid rgba(255,255,255,0.06); padding-left: 20px; transition: border-color 0.2s; }
+.ci:hover { border-color: var(--red); }
+.ci-l { font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: rgba(255,255,255,0.3); margin-bottom: 6px; }
+.ci-v { font-size: 15px; color: #fff; }
+
+/* ── FOOTER ── */
+.footer { padding: 22px 52px; background: var(--ink); border-top: 1px solid rgba(255,255,255,0.05); display: flex; justify-content: space-between; align-items: center; }
+.ft { font-size: 11px; letter-spacing: 0.1em; color: rgba(255,255,255,0.25); }
+.ft-live { display: flex; align-items: center; gap: 8px; }
+.ft-dot { width: 5px; height: 5px; background: var(--red); border-radius: 50%; animation: pulse 2s ease-in-out infinite; }
+
+/* ── REVEAL ── */
+.rv { opacity: 0; transform: translateY(24px); transition: opacity 0.75s ease, transform 0.75s ease; }
+.rv.in { opacity: 1; transform: none; }
+.rv-l { opacity: 0; transform: translateX(-20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.rv-l.in { opacity: 1; transform: none; }
+.rv-r { opacity: 0; transform: translateX(20px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.rv-r.in { opacity: 1; transform: none; }
+
+/* HERO load animations */
+.hero-kicker { animation: fadeUp 0.6s 0.1s both; }
+.hero-h { animation: fadeUp 0.7s 0.25s both; }
+.hero-tagline { animation: fadeUp 0.7s 0.4s both; }
+.hero-desc { animation: fadeUp 0.7s 0.5s both; }
+.hero-actions { animation: fadeUp 0.7s 0.6s both; }
+.hero-mosaic { animation: fadeUp 0.8s 0.35s both; }
+
+@keyframes fadeUp { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: none; } }
+@keyframes mq { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+@keyframes pulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.4; transform: scale(0.7); } }
+
+
+</style>
+</head>
+<body>
+
+
+<div class="c-dot" id="cdot"></div>
+<div class="c-ring" id="cring"></div>
+
+<div class="wrap">
+
+
+<!-- NAV -->
+<nav class="nav">
+  <div class="nav-logo-wrap">
+    <div class="nav-logo">Wonder Tech <span>Nusantara</span></div>
+  </div>
+  <ul class="nav-menu">
+    <li><a href="#about">about</a></li>
+    <li><a href="#services">services</a></li>
+    <li><a href="#experience">experience</a></li>
+    <li><a href="#contact">contact</a></li>
+  </ul>
+  <button class="nav-btn" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Let's talk</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-left">
+    <div class="hero-kicker">Independent Tech Consultant · Jakarta, Indonesia</div>
+    <div class="hero-fullname">Dewi Lutfiana Sari, ST., MM.</div>
+    <h1 class="hero-h">
+      Technology without<br>
+      <em>clarity is just noise.</em>
+    </h1>
+    <p class="hero-tagline">A technologist who found her way into strategy.</p>
+    <p class="hero-desc">8+ years across banking, government tech, and independent consulting. I help organizations see their technology more clearly, and decide what to do about it.</p>
+    <div class="hero-actions">
+      <button class="btn-fill" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Work with me</button>
+      <span class="btn-text" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">See what I do <span class="arr">→</span></span>
+    </div>
+  </div>
+  <div class="hero-mosaic">
+    <div class="m m-a">
+      <div class="m-inner">
+        <div class="m-label">Wonder Tech Nusantara</div>
+        <div class="m-val">Founder &<br>Independent<br>Consultant</div>
+      </div>
+    </div>
+    <div class="m m-b">
+      <div class="m-inner">
+        <div class="m-big">8</div>
+        <div class="m-val">Years on<br><em>both sides<br>of the table</em></div>
+        <div class="m-sub">Banking · Gov · Tech</div>
+      </div>
+    </div>
+    <div class="m m-c">
+      <div class="m-c-inner">
+        <div class="m-big-n">B2G</div>
+        <div class="m-sub">Primary Market</div>
+      </div>
+    </div>
+    <div class="m m-d">
+      <div class="m-inner">
+        <div class="m-quote">"The gap between what a system does and what an organization believes it does."</div>
+        <div class="m-attr">Where I work</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- MARQUEE -->
+<div class="marquee">
+  <div class="marquee-inner">
+    <span class="mq-item">Technology Advisory <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Market Entry Indonesia <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Collection Systems <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Digital Transformation <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Technology Advisory <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Market Entry Indonesia <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Collection Systems <span class="mq-sep">✦</span></span>
+    <span class="mq-item">Digital Transformation <span class="mq-sep">✦</span></span>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="intro" id="about">
+  <div class="intro-left rv-l">
+    <div>
+      <div class="sec-label">About</div>
+      <h2 class="sec-h">How I<br>see <em>things.</em></h2>
+    </div>
+    <div class="intro-pills">
+      <div class="pill hov">Cyber Intelligence Advisory <span class="pill-arr">→</span></div>
+      <div class="pill hov">Market Navigation <span class="pill-arr">→</span></div>
+      <div class="pill hov">Financial Technology <span class="pill-arr">→</span></div>
+    </div>
+  </div>
+  <div class="intro-right rv">
+    <div class="intro-body">
+      <p>Most technology projects fail not from bad engineering. They fail because of a gap between what a system <strong>does</strong> and what an organization <em>believes it does.</em> I work at that gap.</p>
+      <p>My perspective is shaped by being in the room. Technology assessments, factory visits, and vendor evaluations across the US, Europe, and Asia, conducted alongside Indonesia's strategic sector teams, are the foundation of how I advise clients today.</p>
+      <p>My work is grounded in the <em>Intelligence Cycle</em>, the same framework used by intelligence organizations worldwide to turn raw information into decisions. I apply it to technology: collecting what is actually happening, processing what it means, and translating it into action that organizations can move on.</p>
+    </div>
+  </div>
+</section>
+
+<div style="padding:64px 52px;border-bottom:1px solid #ebebeb;">
+  <div style="margin-bottom:40px;">
+    <p style="font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#8c1c0e;margin-bottom:12px;font-weight:500;display:flex;align-items:center;gap:10px;"><span style="display:inline-block;width:20px;height:1px;background:#8c1c0e;"></span>Framework</p>
+    <h2 style="font-family:'Playfair Display',Georgia,serif;font-size:36px;font-weight:700;line-height:1.1;color:#1c1814;">The <em style="font-style:italic;color:#8c1c0e;">Intelligence Cycle</em></h2>
+    <p style="font-family:'Cormorant Garamond',Georgia,serif;font-style:italic;font-size:16px;color:#9a9590;margin-top:10px;max-width:560px;">The same framework intelligence organizations use to turn raw information into decisions. Applied to technology advisory.</p>
+  </div>
+  <svg width="100%" viewBox="0 0 960 340" role="img" xmlns="http://www.w3.org/2000/svg">
+    <title>Intelligence Cycle Framework</title>
+    <desc>Five-stage Intelligence Cycle: Direction, Collection, Processing, Analysis, Dissemination</desc>
+    <defs>
+      <marker id="ic-arrow" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+        <path d="M2 1L8 5L2 9" fill="none" stroke="context-stroke" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+      </marker>
+    </defs>
+    <!-- Connecting arrows -->
+    <line x1="188" y1="170" x2="218" y2="170" stroke="#e0d8d0" stroke-width="1" marker-end="url(#ic-arrow)"/>
+    <line x1="374" y1="170" x2="404" y2="170" stroke="#e0d8d0" stroke-width="1" marker-end="url(#ic-arrow)"/>
+    <line x1="560" y1="170" x2="590" y2="170" stroke="#e0d8d0" stroke-width="1" marker-end="url(#ic-arrow)"/>
+    <line x1="746" y1="170" x2="776" y2="170" stroke="#e0d8d0" stroke-width="1" marker-end="url(#ic-arrow)"/>
+    <!-- Stage 1: Direction -->
+    <rect x="20" y="100" width="168" height="140" rx="4" fill="#fdf2f1" stroke="#edc4bb" stroke-width="0.5"/>
+    <rect x="20" y="100" width="168" height="4" rx="2" fill="#8c1c0e"/>
+    <text font-family="'DM Sans',sans-serif" font-size="10" font-weight="500" letter-spacing="0.15em" fill="#8c1c0e" x="104" y="126" text-anchor="middle">01</text>
+    <text font-family="'Playfair Display',Georgia,serif" font-size="17" font-weight="700" fill="#1c1814" x="104" y="154" text-anchor="middle">Direction</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="104" y="178" text-anchor="middle">What do we need</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="104" y="194" text-anchor="middle">to know?</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="104" y="222" text-anchor="middle">Defining the right</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="104" y="236" text-anchor="middle">questions</text>
+    <!-- Stage 2: Collection -->
+    <rect x="220" y="100" width="152" height="140" rx="4" fill="#fafaf9" stroke="#ebebeb" stroke-width="0.5"/>
+    <rect x="220" y="100" width="152" height="4" rx="2" fill="#2c2620"/>
+    <text font-family="'DM Sans',sans-serif" font-size="10" font-weight="500" letter-spacing="0.15em" fill="#9a9590" x="296" y="126" text-anchor="middle">02</text>
+    <text font-family="'Playfair Display',Georgia,serif" font-size="17" font-weight="700" fill="#1c1814" x="296" y="154" text-anchor="middle">Collection</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="296" y="178" text-anchor="middle">What is actually</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="296" y="194" text-anchor="middle">happening?</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="296" y="222" text-anchor="middle">Gathering raw</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="296" y="236" text-anchor="middle">information</text>
+    <!-- Stage 3: Processing -->
+    <rect x="406" y="100" width="152" height="140" rx="4" fill="#fafaf9" stroke="#ebebeb" stroke-width="0.5"/>
+    <rect x="406" y="100" width="152" height="4" rx="2" fill="#2c2620"/>
+    <text font-family="'DM Sans',sans-serif" font-size="10" font-weight="500" letter-spacing="0.15em" fill="#9a9590" x="482" y="126" text-anchor="middle">03</text>
+    <text font-family="'Playfair Display',Georgia,serif" font-size="17" font-weight="700" fill="#1c1814" x="482" y="154" text-anchor="middle">Processing</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="482" y="178" text-anchor="middle">What does it</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="482" y="194" text-anchor="middle">mean?</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="482" y="222" text-anchor="middle">Structuring and</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="482" y="236" text-anchor="middle">verifying data</text>
+    <!-- Stage 4: Analysis -->
+    <rect x="592" y="100" width="152" height="140" rx="4" fill="#fafaf9" stroke="#ebebeb" stroke-width="0.5"/>
+    <rect x="592" y="100" width="152" height="4" rx="2" fill="#2c2620"/>
+    <text font-family="'DM Sans',sans-serif" font-size="10" font-weight="500" letter-spacing="0.15em" fill="#9a9590" x="668" y="126" text-anchor="middle">04</text>
+    <text font-family="'Playfair Display',Georgia,serif" font-size="17" font-weight="700" fill="#1c1814" x="668" y="154" text-anchor="middle">Analysis</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="668" y="178" text-anchor="middle">What should we</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="668" y="194" text-anchor="middle">conclude?</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="668" y="222" text-anchor="middle">Drawing actionable</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="668" y="236" text-anchor="middle">conclusions</text>
+    <!-- Stage 5: Dissemination -->
+    <rect x="778" y="100" width="162" height="140" rx="4" fill="#fdf2f1" stroke="#edc4bb" stroke-width="0.5"/>
+    <rect x="778" y="100" width="162" height="4" rx="2" fill="#8c1c0e"/>
+    <text font-family="'DM Sans',sans-serif" font-size="10" font-weight="500" letter-spacing="0.15em" fill="#8c1c0e" x="859" y="126" text-anchor="middle">05</text>
+    <text font-family="'Playfair Display',Georgia,serif" font-size="17" font-weight="700" fill="#1c1814" x="859" y="154" text-anchor="middle">Dissemination</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="859" y="178" text-anchor="middle">What do decision</text>
+    <text font-family="'DM Sans',sans-serif" font-size="11.5" fill="#6a6460" x="859" y="194" text-anchor="middle">makers need?</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="859" y="222" text-anchor="middle">Translating insight</text>
+    <text font-family="'Cormorant Garamond',Georgia,serif" font-size="12" font-style="italic" fill="#9a9590" x="859" y="236" text-anchor="middle">into action</text>
+    <!-- Bottom label -->
+    <text font-family="'DM Sans',sans-serif" font-size="11" letter-spacing="0.1em" fill="#9a9590" x="480" y="315" text-anchor="middle" text-transform="uppercase">Applied to technology advisory across all three practice areas</text>
+  </svg>
+</div>
+
+<!-- SERVICES / PILLARS -->
+<section class="pillars" id="services">
+  <div class="pillars-head rv">
+    <div class="sec-label">What I Do</div>
+    <p class="pillars-sub">Three areas. One common thread: clarity.</p>
+  </div>
+  <div class="pillars-grid">
+    <div class="pillar rv">
+      <div class="pillar-ghost">01</div>
+      <div class="pillar-kicker">Intelligence · Cyber</div>
+      <div class="pillar-name">Cyber & Intelligence Advisory</div>
+      <p class="pillar-desc">I work with government institutions and intelligence-adjacent organizations to assess their technology capabilities, identify blind spots, and build clarity around what their systems actually do. Having seen how these systems are built from the inside, I know where vendors cut corners. I know what questions institutions should be asking.</p>
+      <div class="pillar-bar"></div>
+    </div>
+    <div class="pillar rv">
+      <div class="pillar-ghost">02</div>
+      <div class="pillar-kicker">Principal · Market</div>
+      <div class="pillar-name">Market Entry & Principal Partnership</div>
+      <p class="pillar-desc">For international technology companies looking to understand Indonesia's strategic sector market: I help principals navigate the landscape, build relationships with the right stakeholders, and position their technology in a way that resonates with how decisions are actually made here. This is not distribution. This is strategy.</p>
+      <div class="pillar-bar"></div>
+    </div>
+    <div class="pillar rv">
+      <div class="pillar-ghost">03</div>
+      <div class="pillar-kicker">Banking · Financial</div>
+      <div class="pillar-name">Financial Technology & Collection Systems</div>
+      <p class="pillar-desc">Grounded in 4+ years at one of Indonesia's largest banks, I understand how collection management systems, NPL analytics, and banking IT infrastructure work at scale. I advise financial institutions on system assessments, process improvement, and technology decisions from a position of genuine operational experience.</p>
+      <div class="pillar-bar"></div>
+    </div>
+  </div>
+</section>
+
+<!-- EXPERIENCE / JOURNEY -->
+<section class="journey" id="experience">
+  <div class="journey-head rv">
+    <div class="sec-label">Experience</div>
+    <h2 class="sec-h">The <em>journey</em> here.</h2>
+    <p class="journey-intro">Not a list of jobs. A set of perspectives that now work together.</p>
+  </div>
+  <div>
+    <div class="jitem rv">
+      <div class="jitem-left">
+        <div class="j-period">2024 · Present</div>
+        <div class="j-org">Wonder Tech Nusantara</div>
+      </div>
+      <div class="jitem-right">
+        <div class="j-role">Independent Tech Consultant</div>
+        <p class="j-desc">This is where everything before it comes together. I founded WTN to work independently, advising government institutions on technology capability, helping international principals navigate the Indonesian market, and bringing a perspective that only comes from having been on the other side.</p>
+      </div>
+    </div>
+    <div class="jitem rv">
+      <div class="jitem-left">
+        <div class="j-period">2022 · 2024</div>
+        <div class="j-org">Tech Intelligence Partner</div>
+      </div>
+      <div class="jitem-right">
+        <div class="j-role">Program Manager</div>
+        <p class="j-desc">Two years managing technology programs for a vendor serving national intelligence environments, including field visits to technology manufacturers and intelligence-grade vendors across the US, Europe, and Asia alongside strategic sector teams. This is where I learned how systems actually get built, what vendors promise versus what they deliver, and what the right questions sound like from the inside. It is the foundation of how I assess technology today.</p>
+      </div>
+    </div>
+    <div class="jitem rv">
+      <div class="jitem-left">
+        <div class="j-period">2017 · 2022</div>
+        <div class="j-org">PT Bank Danamon Indonesia</div>
+      </div>
+      <div class="jitem-right">
+        <div class="j-role">Technology & Collections</div>
+        <p class="j-desc">Five years inside one of Indonesia's largest banks, starting from the technical layer: building systems, databases, integrations, then moving into project management for collection systems across all Indonesian regions. I saw firsthand how technology decisions at the top translate, or fail to translate, into operational reality. That distance between what a system is supposed to do and what actually happens on the ground became my specialty.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUOTE -->
+<section style="padding:80px 52px;border-top:1px solid var(--line);text-align:center;">
+  <p style="font-family:var(--display);font-size:clamp(22px,3vw,36px);font-weight:300;font-style:italic;color:var(--ink);line-height:1.4;max-width:600px;margin:0 auto 16px;">"The truth shall make you free."</p>
+  <p style="font-size:11px;letter-spacing:0.18em;text-transform:uppercase;color:var(--ink3);">Inscription · CIA Headquarters, Langley</p>
+</section>
+
+<!-- CONTACT -->
+<section class="contact" id="contact">
+  <div class="contact-inner">
+    <div class="rv">
+      <div class="ct-label">Get in Touch</div>
+      <h2 class="ct-h">Let's build<br><em>an impact.</em></h2>
+      <p class="ct-p">I do not take every project. I take the ones where the work will actually matter.</p>
+      <button class="ct-btn" onclick="window.location.href='mailto:dewi@wtechnusantara.id'">Send a message →</button>
+      <a href="https://www.linkedin.com/in/ms-dls/" target="_blank" style="display:inline-flex;align-items:center;gap:10px;margin-top:12px;padding:13px 28px;background:#0A66C2;color:#fff;font-family:var(--body);font-size:12px;letter-spacing:0.1em;text-decoration:none;border-radius:2px;transition:background 0.2s;" onmouseover="this.style.background='#004182'" onmouseout="this.style.background='#0A66C2'">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.064 2.064 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
+        Reach me on LinkedIn
+      </a>
+    </div>
+    <div class="ct-info rv">
+      <div class="ci"><div class="ci-l">Email</div><div class="ci-v">dewi@wtechnusantara.id</div></div>
+      <div class="ci"><div class="ci-l">Website</div><div class="ci-v">www.wtechnusantara.id</div></div>
+      <div class="ci"><div class="ci-l">Location</div><div class="ci-v">Jakarta, Indonesia</div></div>
+      <div class="ci"><div class="ci-l">Available for</div><div class="ci-v">Consulting · Advisory · Partnership</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- FOOTER -->
+<footer class="footer">
+  <span class="ft">© 2025 Dewi Lutfiana Sari, ST., MM. · Wonder Tech Nusantara</span>
+  <div class="ft ft-live"><div class="ft-dot"></div><span>Independent Technology Consultant · Wonder Tech Nusantara</span></div>
+</footer>
+
+</div>
+
+<script>
+// Cursor
+const dot = document.getElementById('cdot');
+const ring = document.getElementById('cring');
+let mx = 0, my = 0, rx = 0, ry = 0;
+document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.left = mx + 'px'; dot.style.top = my + 'px'; });
+(function loop() { rx += (mx - rx) * 0.1; ry += (my - ry) * 0.1; ring.style.left = rx + 'px'; ring.style.top = ry + 'px'; requestAnimationFrame(loop); })();
+document.querySelectorAll('a, button, .hov, .m, .jitem, .citem, .pillar').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.style.width = '14px'; dot.style.height = '14px'; ring.style.width = '44px'; ring.style.height = '44px'; });
+  el.addEventListener('mouseleave', () => { dot.style.width = '7px'; dot.style.height = '7px'; ring.style.width = '28px'; ring.style.height = '28px'; });
+});
+
+// Scroll reveal
+const obs = new IntersectionObserver(entries => {
+  entries.forEach((e, i) => { if (e.isIntersecting) { setTimeout(() => e.target.classList.add('in'), i * 60); } });
+}, { threshold: 0.08, rootMargin: '0px 0px -40px 0px' });
+document.querySelectorAll('.rv, .rv-l, .rv-r').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>
